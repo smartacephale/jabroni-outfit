@@ -4,6 +4,10 @@ const style_ = `#tapermonkey-app *,#tapermonkey-app :before,#tapermonkey-app :af
 GM_addStyle(style_);
 
 GM_addStyle(`
+      #tapermonkey-app input, #tapermonkey-app button { color: rgb(212,212,216); }
+      #tapermonkey-app input::placeholder { color: #9ca3af; }
+      #tapermonkey-app button { background-color: rgb(55, 65, 81); }
+      #tapermonkey-app input[type="checkbox"] { margin-right: .5rem; }
       #tapermonkey-app .flex.items-center:first-child:hover { background: #3741512b; }
       #tapermonkey-app input[type="text"]:hover { background: #52525b; }
       #tapermonkey-app input[type="number"]:hover { background: #4b5563; }

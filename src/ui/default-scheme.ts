@@ -30,6 +30,6 @@ export const extendDefaultScheme = (newScheme: Scheme) =>
 export const defaultSchemeWithPrivateFilter = extendDefaultScheme({
   privateFilter: [
     { type: "checkbox", model: "state.filterPrivate", label: "private" },
-    { type: "checkbox", model: "state.filterPublic", label: "public" },
+    { type: "checkbox", model: "state.filterPublic", label: "public" }
   ]
 });
