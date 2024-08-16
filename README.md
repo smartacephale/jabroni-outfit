@@ -5,7 +5,7 @@
   <img src="https://i.imgur.com/hCyUJvd.png" alt="Sublime's custom image"/>
 </p>
 
-## how to use
+## How to use
 ```
 <script src="https://unpkg.com/jabroni-outfit@1.3.0/dist/jabroni-outfit.umd.js"></script>
 ```
