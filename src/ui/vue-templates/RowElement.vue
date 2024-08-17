@@ -28,9 +28,9 @@ const componentStyles = {
 
 const innerTextValue = (() => {
   if (!innerText?.includes('return')) return innerText || "";
-  const f = new Function('state', 'stateLocale', innerText);
+  const f = new Function('state', 'stateLocale', `${innerText}`);
   return f(state, stateLocale);
-})();
+});
 
 const value = new Function('state', 'stateLocale', `return ${model || ""}`)(state, stateLocale);
 const updateValue = ({ target: { checked, value } }) => {
@@ -45,12 +45,20 @@ if (rest["v-if"]) {
   vif = new Function('state', 'stateLocale', rest["v-if"])(state, stateLocale);
 }
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+let callbackWrap: any;
+if (callback) {
+  callbackWrap = async () => {
+    callback();
+  }
+}
+
 </script>
 <template>
   <label v-if="labelBefore" :for="id" class="text-zinc-300 mx-2 font-mono">{{ labelBefore }}</label>
   <component v-if="vif" :id="id" :is="tag" :type="ctype" :class="componentStyles[type]" :checked="!!value"
-    :value="value" v-on:change="updateValue" v-on:input="updateValue" @click="callback" v-bind="rest">
-    {{ innerTextValue }}
+    :value="value" v-on:change="updateValue" v-on:input="updateValue" @click="callbackWrap" v-bind="rest">
+    {{ innerTextValue() }}
   </component>
   <label v-if="label" :for="id" class="text-zinc-300 flex font-mono">{{ label }}</label>
 </template>
