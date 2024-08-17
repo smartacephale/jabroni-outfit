@@ -40,11 +40,16 @@ const updateValue = ({ target: { checked, value } }) => {
   props[stateName][stateProp] = val;
 };
 
+let vif = true;
+if (rest["v-if"]) {
+  vif = new Function('state', 'stateLocale', rest["v-if"])(state, stateLocale);
+}
+
 </script>
 <template>
   <label v-if="labelBefore" :for="id" class="text-zinc-300 mx-2 font-mono">{{ labelBefore }}</label>
-  <component :id="id" :is="tag" :type="ctype" :class="componentStyles[type]" :checked="!!value" :value="value"
-    v-on:change="updateValue" v-on:input="updateValue" @click="callback" v-bind="rest">
+  <component v-if="vif" :id="id" :is="tag" :type="ctype" :class="componentStyles[type]" :checked="!!value"
+    :value="value" v-on:change="updateValue" v-on:input="updateValue" @click="callback" v-bind="rest">
     {{ innerTextValue }}
   </component>
   <label v-if="label" :for="id" class="text-zinc-300 flex font-mono">{{ label }}</label>
