@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Reactive } from "vue";
+import { computed, type Reactive } from "vue";
 import type { RecordV } from "../../store/types";
 import type { SchemeRowEl } from "../types";
 
@@ -26,7 +26,7 @@ const componentStyles = {
   span: "text-zinc-300 ml-auto mr-4",
 }
 
-const innerTextValue = (() => {
+const innerTextValue = computed(() => {
   if (!innerText?.includes('return')) return innerText || "";
   const f = new Function('state', 'stateLocale', `${innerText}`);
   return f(state, stateLocale);
@@ -40,25 +40,26 @@ const updateValue = ({ target: { checked, value } }) => {
   props[stateName][stateProp] = val;
 };
 
-let vif = true;
-if (rest["v-if"]) {
-  vif = new Function('state', 'stateLocale', rest["v-if"])(state, stateLocale);
-}
+const vif = computed(() => {
+  if (!element?.['v-if']) return true;
+  const f = new Function('state', 'stateLocale', `${element['v-if']}`);
+  return f(state, stateLocale);
+});
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-let callbackWrap: any;
-if (callback) {
-  callbackWrap = async () => {
-    callback();
-  }
-}
+// button state
+// let callbackWrap: () => Promise<void> | undefined;
+// if (callback) {
+//   callbackWrap = async () => {
+//     callback();
+//   }
+// }
 
 </script>
 <template>
   <label v-if="labelBefore" :for="id" class="text-zinc-300 mx-2 font-mono">{{ labelBefore }}</label>
   <component v-if="vif" :id="id" :is="tag" :type="ctype" :class="componentStyles[type]" :checked="!!value"
-    :value="value" v-on:change="updateValue" v-on:input="updateValue" @click="callbackWrap" v-bind="rest">
-    {{ innerTextValue() }}
+    :value="value" v-on:change="updateValue" v-on:input="updateValue" @click="callback" v-bind="rest">
+    {{ innerTextValue }}
   </component>
   <label v-if="label" :for="id" class="text-zinc-300 flex font-mono">{{ label }}</label>
 </template>
