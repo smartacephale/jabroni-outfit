@@ -1,7 +1,7 @@
-import { defaultStateWithDurationAndPrivacy } from "./store/default-state";
-import { JabroniOutfitStore } from "./store/store";
-import { JabroniOutfitUI } from "./ui";
-import { defaultSchemeWithPrivateFilter } from "./ui/default-scheme";
+import { defaultStateWithDurationAndPrivacy } from "../store/default-state";
+import { JabroniOutfitStore } from "../store/store";
+import { JabroniOutfitUI } from "../ui";
+import { defaultSchemeWithPrivateFilter } from "../ui/default-scheme";
 
 const example1 = () => {
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
@@ -47,4 +47,5 @@ const example2 = () => {
   store.subscribe(drawGradient);
 }
 
-example1();
+// example1();
+example2();

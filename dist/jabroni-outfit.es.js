@@ -4247,7 +4247,7 @@ const ft = {
   }
 }, Ei = Object.assign({}, ft.EXCLUDE, ft.INCLUDE, ft.MISC, ft.PAGINATION), Vc = Object.assign({}, Ei, ft.DURATION_FILTER), Zc = Object.assign({}, Vc, ft.PRIVACY_FILTER);
 function Cc(e, t) {
-  return Number.isInteger(Number.parseInt(e)) ? Number.parseInt(e) : t;
+  return Number.isInteger(parseInt(e)) ? parseInt(e) : t;
 }
 function Sc(e) {
   const t = new DOMParser().parseFromString(e, "text/html").body;
@@ -4467,3 +4467,4 @@ export {
   Zc as defaultStateWithDurationAndPrivacy,
   Tc as extendDefaultScheme
 };
+//# sourceMappingURL=jabroni-outfit.es.js.map

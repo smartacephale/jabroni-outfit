@@ -6,9 +6,6 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx,vue}",
   ],
-  theme: {
-    extend: {},
-  },
   plugins: [
     scopedPreflightStyles({
       isolationStrategy: isolateInsideOfContainer('.taper-class'),
