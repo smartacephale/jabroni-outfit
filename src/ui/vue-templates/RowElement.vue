@@ -37,6 +37,7 @@ const updateValue = ({ target: { checked, value } }) => {
   if (!model?.startsWith("state")) return;
   const [stateName, stateProp] = model.split('.');
   const val = type === 'checkbox' ? checked : value;
+  console.log('change', val);
   props[stateName][stateProp] = val;
 };
 
@@ -44,7 +45,7 @@ const updateValue = ({ target: { checked, value } }) => {
 <template>
   <label v-if="labelBefore" :for="id" class="text-zinc-300 mx-2 font-mono">{{ labelBefore }}</label>
   <component :id="id" :is="tag" :type="ctype" :class="componentStyles[type]" :checked="!!value" :value="value"
-    v-on:change="updateValue" @click="callback" v-bind="rest">
+    v-on:change="updateValue" v-on:input="updateValue" @click="callback" v-bind="rest">
     {{ innerTextValue }}
   </component>
   <label v-if="label" :for="id" class="text-zinc-300 flex font-mono">{{ label }}</label>

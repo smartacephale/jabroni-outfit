@@ -704,11 +704,11 @@ const to = (e) => B(e) ? gn(e) : e, no = (e) => B(e) ? Cr(e) : e;
 function re(e) {
   return !!(e && e.__v_isRef === !0);
 }
-function X(e) {
+function Z(e) {
   return re(e) ? e.value : e;
 }
 const Ns = {
-  get: (e, t, n) => X(Reflect.get(e, t, n)),
+  get: (e, t, n) => Z(Reflect.get(e, t, n)),
   set: (e, t, n, o) => {
     const r = e[t];
     return re(r) && !re(n) ? (r.value = n, !0) : Reflect.set(e, t, n, o);
@@ -888,7 +888,7 @@ function xs(e, t, n, o = !0) {
     console.error(e);
 }
 let At = !1, Rn = !1;
-const Z = [];
+const Q = [];
 let Ne = 0;
 const ht = [];
 let Le = null, Je = 0;
@@ -900,25 +900,25 @@ function Vs(e) {
   return e ? t.then(this ? e.bind(this) : e) : t;
 }
 function Cs(e) {
-  let t = Ne + 1, n = Z.length;
+  let t = Ne + 1, n = Q.length;
   for (; t < n; ) {
-    const o = t + n >>> 1, r = Z[o], i = Ft(r);
+    const o = t + n >>> 1, r = Q[o], i = Ft(r);
     i < e || i === e && r.pre ? t = o + 1 : n = o;
   }
   return t;
 }
 function En(e) {
-  (!Z.length || !Z.includes(
+  (!Q.length || !Q.includes(
     e,
     At && e.allowRecurse ? Ne + 1 : Ne
-  )) && (e.id == null ? Z.push(e) : Z.splice(Cs(e.id), 0, e), Mr());
+  )) && (e.id == null ? Q.push(e) : Q.splice(Cs(e.id), 0, e), Mr());
 }
 function Mr() {
   !At && !Rn && (Rn = !0, oo = $r.then(Pr));
 }
 function Ss(e) {
-  const t = Z.indexOf(e);
-  t > Ne && Z.splice(t, 1);
+  const t = Q.indexOf(e);
+  t > Ne && Q.splice(t, 1);
 }
 function Ar(e) {
   S(e) ? ht.push(...e) : (!Le || !Le.includes(
@@ -927,12 +927,12 @@ function Ar(e) {
   )) && ht.push(e), Mr();
 }
 function Io(e, t, n = At ? Ne + 1 : 0) {
-  for (a.NODE_ENV !== "production" && (t = t || /* @__PURE__ */ new Map()); n < Z.length; n++) {
-    const o = Z[n];
+  for (a.NODE_ENV !== "production" && (t = t || /* @__PURE__ */ new Map()); n < Q.length; n++) {
+    const o = Q[n];
     if (o && o.pre) {
       if (e && o.id !== e.uid || a.NODE_ENV !== "production" && ro(t, o))
         continue;
-      Z.splice(n, 1), n--, o();
+      Q.splice(n, 1), n--, o();
     }
   }
 }
@@ -961,11 +961,11 @@ const Ft = (e) => e.id == null ? 1 / 0 : e.id, Ts = (e, t) => {
   return n;
 };
 function Pr(e) {
-  Rn = !1, At = !0, a.NODE_ENV !== "production" && (e = e || /* @__PURE__ */ new Map()), Z.sort(Ts);
+  Rn = !1, At = !0, a.NODE_ENV !== "production" && (e = e || /* @__PURE__ */ new Map()), Q.sort(Ts);
   const t = a.NODE_ENV !== "production" ? (n) => ro(e, n) : oe;
   try {
-    for (Ne = 0; Ne < Z.length; Ne++) {
-      const n = Z[Ne];
+    for (Ne = 0; Ne < Q.length; Ne++) {
+      const n = Q[Ne];
       if (n && n.active !== !1) {
         if (a.NODE_ENV !== "production" && t(n))
           continue;
@@ -977,7 +977,7 @@ function Pr(e) {
       }
     }
   } finally {
-    Ne = 0, Z.length = 0, Fr(e), At = !1, oo = null, (Z.length || ht.length) && Pr(e);
+    Ne = 0, Q.length = 0, Fr(e), At = !1, oo = null, (Q.length || ht.length) && Pr(e);
   }
 }
 function ro(e, t) {
@@ -2147,7 +2147,7 @@ function bl(e, t) {
       Sn(l, b),
       w,
       y
-    ), T && Ge(l, null, E, "created"), ee(O, l, l.scopeId, w, E), v) {
+    ), T && Ge(l, null, E, "created"), X(O, l, l.scopeId, w, E), v) {
       for (const k in v)
         k !== "value" && !Tt(k) && i(O, k, null, v[k], b, E);
       "value" in v && i(O, "value", null, v.value, b), (_ = v.onVnodeBeforeMount) && be(_, E, l);
@@ -2157,7 +2157,7 @@ function bl(e, t) {
     A && D.beforeEnter(O), o(O, u, h), ((_ = v && v.onVnodeMounted) || A || T) && ie(() => {
       _ && be(_, E, l), A && D.enter(O), T && Ge(l, null, E, "mounted");
     }, g);
-  }, ee = (l, u, h, E, g) => {
+  }, X = (l, u, h, E, g) => {
     if (h && C(l, h), E)
       for (let b = 0; b < E.length; b++)
         C(l, E[b]);
@@ -2165,7 +2165,7 @@ function bl(e, t) {
       let b = g.subTree;
       if (a.NODE_ENV !== "production" && b.patchFlag > 0 && b.patchFlag & 2048 && (b = co(b.children) || b), u === b) {
         const w = g.vnode;
-        ee(
+        X(
           l,
           w,
           w.scopeId,
@@ -2893,8 +2893,8 @@ function vl(e, t, {
 } = U) {
   if (t && i) {
     const M = t;
-    t = (...ee) => {
-      M(...ee), he();
+    t = (...X) => {
+      M(...X), he();
     };
   }
   a.NODE_ENV !== "production" && o !== void 0 && typeof o == "number" && x(
@@ -2954,7 +2954,7 @@ function vl(e, t, {
     if (!(!K.active || !K.dirty))
       if (t) {
         const M = K.run();
-        (o || N || (C ? M.some((ee, le) => _t(ee, H[le])) : _t(M, H))) && ($ && $(), Se(t, p, 3, [
+        (o || N || (C ? M.some((X, le) => _t(X, H[le])) : _t(M, H))) && ($ && $(), Se(t, p, 3, [
           M,
           // pass undefined as the old value when it's changed for the first time
           H === qt ? void 0 : C && H[0] === qt ? [] : H,
@@ -3088,12 +3088,12 @@ function Tn(e) {
   try {
     if (n.shapeFlag & 4) {
       const z = r || o, he = a.NODE_ENV !== "production" && C.__isScriptSetup ? new Proxy(z, {
-        get(M, ee, le) {
+        get(M, X, le) {
           return x(
             `Property '${String(
-              ee
+              X
             )}' was accessed via 'this'. Avoid using 'this' in templates.`
-          ), Reflect.get(M, ee, le);
+          ), Reflect.get(M, X, le);
         }
       }) : z;
       H = _e(
@@ -3138,15 +3138,15 @@ function Tn(e) {
           i
         )), j = Be(j, W, !1, !0);
       else if (a.NODE_ENV !== "production" && !Kn && j.type !== de) {
-        const M = Object.keys(c), ee = [], le = [];
+        const M = Object.keys(c), X = [], le = [];
         for (let Nt = 0, yt = M.length; Nt < yt; Nt++) {
           const Ae = M[Nt];
-          Lt(Ae) ? on(Ae) || ee.push(Ae[2].toLowerCase() + Ae.slice(3)) : le.push(Ae);
+          Lt(Ae) ? on(Ae) || X.push(Ae[2].toLowerCase() + Ae.slice(3)) : le.push(Ae);
         }
         le.length && x(
           `Extraneous non-props attributes (${le.join(", ")}) were passed to component but could not be automatically inherited because component renders fragment or text root nodes.`
-        ), ee.length && x(
-          `Extraneous non-emits event listeners (${ee.join(", ")}) were passed to component but could not be automatically inherited because component renders fragment or text root nodes. If the listener is intended to be a component custom event listener only, declare it using the "emits" option.`
+        ), X.length && x(
+          `Extraneous non-emits event listeners (${X.join(", ")}) were passed to component but could not be automatically inherited because component renders fragment or text root nodes. If the listener is intended to be a component custom event listener only, declare it using the "emits" option.`
         );
       }
     }
@@ -3242,7 +3242,7 @@ function Ml(e, t) {
 }
 const ce = Symbol.for("v-fgt"), Ht = Symbol.for("v-txt"), de = Symbol.for("v-cmt"), en = Symbol.for("v-stc"), $t = [];
 let fe = null;
-function Q(e = !1) {
+function ee(e = !1) {
   $t.push(fe = e ? null : []);
 }
 function Al() {
@@ -3431,7 +3431,7 @@ function ai(e = " ", t = 0) {
   return Te(Ht, null, e, t);
 }
 function Xe(e = "", t = !1) {
-  return t ? (Q(), gt(de, null, e)) : Te(de, null, e);
+  return t ? (ee(), gt(de, null, e)) : Te(de, null, e);
 }
 function _e(e) {
   return e == null || typeof e == "boolean" ? Te(de) : S(e) ? Te(
@@ -4334,7 +4334,7 @@ const bi = {
   Mc
 ];
 function Fc(e, t) {
-  return Q(), ve("svg", $c, Ac);
+  return ee(), ve("svg", $c, Ac);
 }
 const Pc = /* @__PURE__ */ Ni(Ic, [["render", Fc]]), Lc = {}, Rc = {
   class: "h-7 w-7 fill-gray-600 stroke-gray-400",
@@ -4351,7 +4351,7 @@ const Pc = /* @__PURE__ */ Ni(Ic, [["render", Fc]]), Lc = {}, Rc = {
   jc
 ];
 function kc(e, t) {
-  return Q(), ve("svg", Rc, Hc);
+  return ee(), ve("svg", Rc, Hc);
 }
 const Uc = /* @__PURE__ */ Ni(Lc, [["render", kc]]), Bc = ["for"], Kc = ["for"], Wc = /* @__PURE__ */ so({
   __name: "RowElement",
@@ -4369,34 +4369,35 @@ const Uc = /* @__PURE__ */ Ni(Lc, [["render", kc]]), Bc = ["for"], Kc = ["for"],
       span: "text-zinc-300 ml-auto mr-4"
     }, H = c != null && c.includes("return") ? new Function("state", "stateLocale", c)(o, r) : c || "", W = new Function("state", "stateLocale", `return ${s || ""}`)(o, r), j = ({ target: { checked: K, value: z } }) => {
       if (!(s != null && s.startsWith("state"))) return;
-      const [he, M] = s.split("."), ee = i === "checkbox" ? K : z;
-      t[he][M] = ee;
+      const [he, M] = s.split("."), X = i === "checkbox" ? K : z;
+      console.log("change", X), t[he][M] = X;
     };
-    return (K, z) => (Q(), ve(ce, null, [
-      X(p) ? (Q(), ve("label", {
+    return (K, z) => (ee(), ve(ce, null, [
+      Z(p) ? (ee(), ve("label", {
         key: 0,
-        for: X(I),
+        for: Z(I),
         class: "text-zinc-300 mx-2 font-mono"
-      }, dt(X(p)), 9, Bc)) : Xe("", !0),
-      (Q(), gt(Ks(X(C)), di({
-        id: X(I),
-        type: X($),
-        class: pe[X(i)],
-        checked: !!X(W),
-        value: X(W),
+      }, dt(Z(p)), 9, Bc)) : Xe("", !0),
+      (ee(), gt(Ks(Z(C)), di({
+        id: Z(I),
+        type: Z($),
+        class: pe[Z(i)],
+        checked: !!Z(W),
+        value: Z(W),
         onChange: j,
-        onClick: X(m)
+        onInput: j,
+        onClick: Z(m)
       }, d), {
         default: Ur(() => [
-          ai(dt(X(H)), 1)
+          ai(dt(Z(H)), 1)
         ]),
         _: 1
       }, 16, ["id", "type", "class", "checked", "value", "onClick"])),
-      X(f) ? (Q(), ve("label", {
+      Z(f) ? (ee(), ve("label", {
         key: 1,
-        for: X(I),
+        for: Z(I),
         class: "text-zinc-300 flex font-mono"
-      }, dt(X(f)), 9, Kc)) : Xe("", !0)
+      }, dt(Z(f)), 9, Kc)) : Xe("", !0)
     ], 64));
   }
 }), zc = { class: "flex items-center bg-zinc-900 py-2 px-2 m-1 font-mono rounded" }, Gc = /* @__PURE__ */ so({
@@ -4408,8 +4409,8 @@ const Uc = /* @__PURE__ */ Ni(Lc, [["render", kc]]), Bc = ["for"], Kc = ["for"],
   },
   setup(e) {
     const { scheme: t, state: n, stateLocale: o } = e, r = Object.values(t);
-    return (i, s) => (Q(!0), ve(ce, null, Ao(X(r), (c) => (Q(), ve("div", zc, [
-      (Q(!0), ve(ce, null, Ao(c, (f) => (Q(), gt(Wc, {
+    return (i, s) => (ee(!0), ve(ce, null, Ao(Z(r), (c) => (ee(), ve("div", zc, [
+      (ee(!0), ve(ce, null, Ao(c, (f) => (ee(), gt(Wc, {
         element: f,
         stateLocale: i.stateLocale,
         state: i.state
@@ -4427,7 +4428,7 @@ const Uc = /* @__PURE__ */ Ni(Lc, [["render", kc]]), Bc = ["for"], Kc = ["for"],
     scheme: {}
   },
   setup(e) {
-    return (t, n) => t.state.uiEnabled ? (Q(), ve("div", {
+    return (t, n) => t.state.uiEnabled ? (ee(), ve("div", {
       key: 0,
       class: Mt(["fixed bottom-0 right-0 z-9999 rounded bg-zinc-800 max-w-full p-2 m-2", t.state.hidden ? "hover:bg-gray-600" : ""])
     }, [
@@ -4436,12 +4437,12 @@ const Uc = /* @__PURE__ */ Ni(Lc, [["render", kc]]), Bc = ["for"], Kc = ["for"],
         onClick: n[0] || (n[0] = (o) => t.state.hidden = !t.state.hidden)
       }, [
         bt("span", qc, [
-          t.state.hidden && t.stateLocale.pagIndexLast > 1 ? (Q(), ve("span", Jc, dt(t.stateLocale.pagIndexCur) + "/" + dt(t.stateLocale.pagIndexLast), 1)) : Xe("", !0),
-          t.state.hidden ? (Q(), gt(Pc, { key: 1 })) : Xe("", !0),
-          t.state.hidden ? Xe("", !0) : (Q(), gt(Uc, { key: 2 }))
+          t.state.hidden && t.stateLocale.pagIndexLast > 1 ? (ee(), ve("span", Jc, dt(t.stateLocale.pagIndexCur) + "/" + dt(t.stateLocale.pagIndexLast), 1)) : Xe("", !0),
+          t.state.hidden ? (ee(), gt(Pc, { key: 1 })) : Xe("", !0),
+          t.state.hidden ? Xe("", !0) : (ee(), gt(Uc, { key: 2 }))
         ])
       ], 2),
-      t.state.hidden ? Xe("", !0) : (Q(), gt(Gc, {
+      t.state.hidden ? Xe("", !0) : (ee(), gt(Gc, {
         key: 0,
         scheme: t.scheme,
         stateLocale: t.stateLocale,
